@@ -1,28 +1,11 @@
 [gd_scene format=3 uid="uid://2lop85qbonry"]
 
 [ext_resource type="Texture2D" uid="uid://bffe2t1md2o6b" path="res://Assets/Tittle.png" id="1_158mb"]
+[ext_resource type="Script" uid="uid://ofdwea5pgjg6" path="res://Scripts/Button.gd" id="1_jsrd8"]
 [ext_resource type="Texture2D" uid="uid://c8k462wumq41" path="res://Assets/Oinky.png" id="2_wwsa2"]
-[ext_resource type="Script" uid="uid://cyksqg4g83c3r" path="res://Scripts/oinky.gd" id="3_jsrd8"]
+[ext_resource type="Script" uid="uid://cyksqg4g83c3r" path="res://Scripts/Oinky Spinning.gd" id="3_jsrd8"]
 [ext_resource type="Texture2D" uid="uid://dfs4at1w07dvm" path="res://Assets/button.png" id="4_wbdvm"]
 [ext_resource type="FontFile" uid="uid://dadgt5htdsef3" path="res://Assets/VCR_OSD_MONO_1.001.ttf" id="5_wwsa2"]
-
-[sub_resource type="GDScript" id="GDScript_158mb"]
-script/source = "extends Node2D
-
-
-# Called when the node enters the scene tree for the first time.
-func _ready() -> void:
-	pass # Replace with function body.
-
-
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta: float) -> void:
-	pass
-
-
-func _on_play_pressed() -> void:
-	get_tree().change_scene_to_file(\"res://Scenes/game.tscn\")
-"
 
 [sub_resource type="FontFile" id="FontFile_158mb"]
 cache/0/variation_coordinates = {}
@@ -59,7 +42,7 @@ default_font = SubResource("FontFile_158mb")
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_q3rjx"]
 
 [node name="Menu" type="Node2D" unique_id=2066121886]
-script = SubResource("GDScript_158mb")
+script = ExtResource("1_jsrd8")
 
 [node name="Tittle" type="Sprite2D" parent="." unique_id=701560713]
 position = Vector2(579.00006, 385.00003)

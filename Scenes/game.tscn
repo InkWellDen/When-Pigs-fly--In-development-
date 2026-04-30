@@ -7,11 +7,17 @@
 [ext_resource type="FontFile" uid="uid://dadgt5htdsef3" path="res://Assets/VCR_OSD_MONO_1.001.ttf" id="4_3dryh"]
 [ext_resource type="PackedScene" uid="uid://x5vb3jknfjh4" path="res://Scenes/apple.tscn" id="5_wowpa"]
 [ext_resource type="Script" uid="uid://c7luce8dgbc2p" path="res://Scripts/apple_spawner.gd" id="6_i6g32"]
+[ext_resource type="Script" uid="uid://t78k31kcs75p" path="res://Scenes/apple_counter_label.gd" id="8_v158k"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_qxrlw"]
 size = Vector2(148, 967)
 
 [sub_resource type="Theme" id="Theme_wrm1d"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_h4fw4"]
+font = ExtResource("4_3dryh")
+font_size = 31
+font_color = Color(1, 0, 0, 1)
 
 [node name="Game" type="Node2D" unique_id=531414083]
 script = ExtResource("1_1l0tm")
@@ -43,7 +49,7 @@ shape = SubResource("RectangleShape2D_qxrlw")
 [node name="Background" type="Sprite2D" parent="." unique_id=110510226]
 light_mask = 0
 visibility_layer = 4
-position = Vector2(552, 369)
+position = Vector2(545, 363)
 scale = Vector2(2.8077705, 3.4005547)
 texture = ExtResource("3_wrm1d")
 
@@ -72,5 +78,15 @@ apple_scene = ExtResource("5_wowpa")
 [node name="Timer" type="Timer" parent="AppleSpawner" unique_id=726321382]
 wait_time = 6.488
 autostart = true
+
+[node name="AppleCounterLabel" type="Label" parent="." unique_id=348722461]
+offset_left = 14.0
+offset_top = 108.0
+offset_right = 240.0
+offset_bottom = 211.0
+text = "Apples: 0"
+label_settings = SubResource("LabelSettings_h4fw4")
+uppercase = true
+script = ExtResource("8_v158k")
 
 [connection signal="timeout" from="AppleSpawner/Timer" to="AppleSpawner" method="_on_timer_timeout"]
