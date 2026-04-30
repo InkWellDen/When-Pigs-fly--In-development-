@@ -1,0 +1,112 @@
+[gd_scene format=3 uid="uid://2lop85qbonry"]
+
+[ext_resource type="Texture2D" uid="uid://bffe2t1md2o6b" path="res://Assets/Tittle.png" id="1_158mb"]
+[ext_resource type="Texture2D" uid="uid://c8k462wumq41" path="res://Assets/Oinky.png" id="2_wwsa2"]
+[ext_resource type="Script" uid="uid://cyksqg4g83c3r" path="res://Scripts/oinky.gd" id="3_jsrd8"]
+[ext_resource type="Texture2D" uid="uid://dfs4at1w07dvm" path="res://Assets/button.png" id="4_wbdvm"]
+[ext_resource type="FontFile" uid="uid://dadgt5htdsef3" path="res://Assets/VCR_OSD_MONO_1.001.ttf" id="5_wwsa2"]
+
+[sub_resource type="GDScript" id="GDScript_158mb"]
+script/source = "extends Node2D
+
+
+# Called when the node enters the scene tree for the first time.
+func _ready() -> void:
+	pass # Replace with function body.
+
+
+# Called every frame. 'delta' is the elapsed time since the previous frame.
+func _process(delta: float) -> void:
+	pass
+
+
+func _on_play_pressed() -> void:
+	get_tree().change_scene_to_file(\"res://Scenes/game.tscn\")
+"
+
+[sub_resource type="FontFile" id="FontFile_158mb"]
+cache/0/variation_coordinates = {}
+cache/0/face_index = 0
+cache/0/embolden = 0.0
+cache/0/transform = Transform2D(1, 0, 0, 1, 0, 0)
+cache/0/spacing_top = 0
+cache/0/spacing_bottom = 0
+cache/0/spacing_space = 0
+cache/0/spacing_glyph = 0
+cache/0/baseline_offset = 0.0
+cache/0/16/0/ascent = 0.0
+cache/0/16/0/descent = 0.0
+cache/0/16/0/underline_position = 0.0
+cache/0/16/0/underline_thickness = 0.0
+cache/0/16/0/scale = 1.0
+cache/0/14/0/ascent = 0.0
+cache/0/14/0/descent = 0.0
+cache/0/14/0/underline_position = 0.0
+cache/0/14/0/underline_thickness = 0.0
+cache/0/14/0/scale = 1.0
+
+[sub_resource type="Theme" id="Theme_wwsa2"]
+default_font = SubResource("FontFile_158mb")
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_158mb"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_wwsa2"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_jsrd8"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_wbdvm"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_q3rjx"]
+
+[node name="Menu" type="Node2D" unique_id=2066121886]
+script = SubResource("GDScript_158mb")
+
+[node name="Tittle" type="Sprite2D" parent="." unique_id=701560713]
+position = Vector2(579.00006, 385.00003)
+scale = Vector2(2.3560002, 1.802)
+texture = ExtResource("1_158mb")
+
+[node name="Oinky" type="Sprite2D" parent="." unique_id=1481813397]
+position = Vector2(585, 199)
+scale = Vector2(4.36, 4.3)
+texture = ExtResource("2_wwsa2")
+script = ExtResource("3_jsrd8")
+
+[node name="Timer" type="Timer" parent="." unique_id=982323111]
+wait_time = 0.513
+
+[node name="Button" type="Sprite2D" parent="." unique_id=356357563]
+top_level = true
+position = Vector2(557, 466.99997)
+scale = Vector2(3.9, 3.9)
+texture = ExtResource("4_wbdvm")
+
+[node name="button_manager" type="Control" parent="." unique_id=1380068642]
+top_level = true
+layout_mode = 3
+anchors_preset = 0
+offset_left = 135.0
+offset_top = 364.0
+offset_right = 523.0
+offset_bottom = 552.0
+theme = SubResource("Theme_wwsa2")
+
+[node name="Play" type="Button" parent="button_manager" unique_id=1315972557]
+show_behind_parent = true
+layout_mode = 0
+offset_left = 230.0
+offset_top = 20.0
+offset_right = 591.0
+offset_bottom = 176.0
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("5_wwsa2")
+theme_override_font_sizes/font_size = 60
+theme_override_styles/normal = SubResource("StyleBoxEmpty_158mb")
+theme_override_styles/pressed = SubResource("StyleBoxEmpty_wwsa2")
+theme_override_styles/hover = SubResource("StyleBoxEmpty_jsrd8")
+theme_override_styles/disabled = SubResource("StyleBoxEmpty_wbdvm")
+theme_override_styles/focus = SubResource("StyleBoxEmpty_q3rjx")
+text = "Play"
+
+[connection signal="timeout" from="Timer" to="Oinky" method="_on_timer_timeout"]
+[connection signal="pressed" from="button_manager/Play" to="." method="_on_play_pressed"]

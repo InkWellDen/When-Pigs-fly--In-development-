@@ -1,0 +1,33 @@
+[gd_scene format=3 uid="uid://c3umj6rmwfdlr"]
+
+[ext_resource type="Script" uid="uid://b0oqb0o8godt1" path="res://Scripts/player.gd" id="1_cvnsp"]
+[ext_resource type="Texture2D" uid="uid://c8k462wumq41" path="res://Assets/Oinky.png" id="2_cvnsp"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_cvnsp"]
+size = Vector2(113, 68)
+
+[node name="Player" type="CharacterBody2D" unique_id=1762629173]
+script = ExtResource("1_cvnsp")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=2029171761]
+position = Vector2(-10.5, 5)
+shape = SubResource("RectangleShape2D_cvnsp")
+one_way_collision = true
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=2114088257]
+position = Vector2(-10.000004, -4.999996)
+scale = Vector2(2.53, 2.48)
+texture = ExtResource("2_cvnsp")
+
+[node name="WallParticles" type="CPUParticles2D" parent="." unique_id=2105423583]
+position = Vector2(-38, 30)
+emitting = false
+amount = 12
+lifetime = 0.25
+one_shot = true
+explosiveness = 1.0
+randomness = 0.04
+initial_velocity_min = 78.93
+initial_velocity_max = 108.34
+scale_amount_min = 0.4
+scale_amount_max = 10.6
