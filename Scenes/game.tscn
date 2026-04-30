@@ -7,7 +7,8 @@
 [ext_resource type="FontFile" uid="uid://dadgt5htdsef3" path="res://Assets/VCR_OSD_MONO_1.001.ttf" id="4_3dryh"]
 [ext_resource type="PackedScene" uid="uid://x5vb3jknfjh4" path="res://Scenes/apple.tscn" id="5_wowpa"]
 [ext_resource type="Script" uid="uid://c7luce8dgbc2p" path="res://Scripts/apple_spawner.gd" id="6_i6g32"]
-[ext_resource type="Script" uid="uid://t78k31kcs75p" path="res://Scenes/apple_counter_label.gd" id="8_v158k"]
+[ext_resource type="Script" uid="uid://dsok32wg2gsx4" path="res://Scripts/apple.tscn.gd" id="8_h4fw4"]
+[ext_resource type="Texture2D" uid="uid://cp1tpdod616a" path="res://Assets/Appl.png" id="9_ldgsr"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_qxrlw"]
 size = Vector2(148, 967)
@@ -80,13 +81,19 @@ wait_time = 6.488
 autostart = true
 
 [node name="AppleCounterLabel" type="Label" parent="." unique_id=348722461]
-offset_left = 14.0
-offset_top = 108.0
-offset_right = 240.0
-offset_bottom = 211.0
-text = "Apples: 0"
+offset_left = 91.0
+offset_top = 103.0
+offset_right = 317.0
+offset_bottom = 206.0
+scale = Vector2(1.3209531, 1.4858574)
+text = ":0"
 label_settings = SubResource("LabelSettings_h4fw4")
 uppercase = true
-script = ExtResource("8_v158k")
+script = ExtResource("8_h4fw4")
+
+[node name="Appl" type="Sprite2D" parent="." unique_id=704757477]
+position = Vector2(76, 120)
+scale = Vector2(1.7206498, 1.6800005)
+texture = ExtResource("9_ldgsr")
 
 [connection signal="timeout" from="AppleSpawner/Timer" to="AppleSpawner" method="_on_timer_timeout"]

@@ -4,7 +4,7 @@ extends Node2D
 @export var spawn_x: float = 1138.0
 @export var min_y: float = 138.0
 @export var max_y: float = 512.0
-@export var spawn_interval: float = 2.5 # <-- increased delay
+@export var spawn_interval: float = 2.5
 
 var spawn_timer: Timer
 
@@ -24,8 +24,8 @@ func _ready() -> void:
 		spawn_timer.timeout.connect(_on_spawn_timer_timeout)
 
 	print("SPAWNER ready; spawn interval=", spawn_interval)
+	# Do NOT call start_spawning() here
 
-	start_spawning()
 
 func start_spawning() -> void:
 	if spawn_timer == null:
@@ -35,10 +35,12 @@ func start_spawning() -> void:
 	spawn_timer.start()
 	print("SPAWNER start_spawning called")
 
+
 func stop_spawning() -> void:
 	if spawn_timer:
 		spawn_timer.stop()
 		print("SPAWNER stop_spawning called")
+
 
 func _on_spawn_timer_timeout() -> void:
 	if apple_scene == null:
@@ -51,8 +53,10 @@ func _on_spawn_timer_timeout() -> void:
 	container.add_child(apple)
 
 	apple.global_position = Vector2(spawn_x, randf_range(min_y, max_y))
+
 	if "speed" in apple:
 		apple.speed = -abs(apple.speed)
+
 	apple.scale.x = abs(apple.scale.x)
 	apple.scale.y = abs(apple.scale.y)
 

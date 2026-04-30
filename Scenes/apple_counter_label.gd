@@ -7,4 +7,4 @@ func _ready() -> void:
 		Game.apples_changed.connect(_on_apples_changed)
 
 func _on_apples_changed(new_count: int) -> void:
-	text = "Apples: %d" % new_count
+	text = ": %d" % new_count
