@@ -4,6 +4,8 @@
 [ext_resource type="PackedScene" uid="uid://ux8cyhtcn00r" path="res://Scenes/ground.tscn" id="2_wrm1d"]
 [ext_resource type="Texture2D" uid="uid://cdjjerwv7a6it" path="res://Assets/Sky.png" id="3_wrm1d"]
 [ext_resource type="FontFile" uid="uid://dadgt5htdsef3" path="res://Assets/VCR_OSD_MONO_1.001.ttf" id="4_3dryh"]
+[ext_resource type="PackedScene" uid="uid://x5vb3jknfjh4" path="res://Scenes/apple.tscn" id="5_wowpa"]
+[ext_resource type="Script" uid="uid://c7luce8dgbc2p" path="res://Scripts/apple_spawner.gd" id="6_i6g32"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_qxrlw"]
 size = Vector2(148, 967)
@@ -57,3 +59,14 @@ theme_override_colors/font_color = Color(0, 0, 0, 1)
 theme_override_fonts/font = ExtResource("4_3dryh")
 theme_override_font_sizes/font_size = 25
 text = "Press any key to start"
+
+[node name="Apple" parent="." unique_id=997479949 instance=ExtResource("5_wowpa")]
+position = Vector2(900, 341)
+
+[node name="AppleSpawner" type="Node2D" parent="." unique_id=1908028824]
+script = ExtResource("6_i6g32")
+
+[node name="Timer" type="Timer" parent="AppleSpawner" unique_id=726321382]
+wait_time = 1.493
+
+[connection signal="timeout" from="AppleSpawner/Timer" to="AppleSpawner" method="_on_timer_timeout"]
