@@ -7,6 +7,7 @@
 size = Vector2(113, 68)
 
 [node name="Player" type="CharacterBody2D" unique_id=1762629173]
+collision_layer = 2
 script = ExtResource("1_cvnsp")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=2029171761]

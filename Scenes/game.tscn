@@ -30,6 +30,7 @@ scale = Vector2(1.6669215, 1.8135186)
 
 [node name="Collisons for Player" type="StaticBody2D" parent="." unique_id=1579306229]
 position = Vector2(252, 202)
+collision_layer = 2
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Collisons for Player" unique_id=533567369]
 position = Vector2(-357, 133)
@@ -49,6 +50,8 @@ texture = ExtResource("3_wrm1d")
 [node name="Player" parent="." unique_id=1762629173 instance=ExtResource("1_qxrlw")]
 top_level = true
 position = Vector2(524, 324)
+collision_layer = 1
+collision_mask = 2
 
 [node name="StartLabel" type="Label" parent="." unique_id=1891919410]
 top_level = true

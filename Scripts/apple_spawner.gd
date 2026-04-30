@@ -1,71 +1,59 @@
 extends Node2D
 
-# ---------------------------------------------------------
-# Apple Spawner Script
-# Spawns apples at X = 1138 and Y between 138 and 512
-# ---------------------------------------------------------
-
-@export var spawn_x: float = 1138
-@export var min_y: float = 138
-@export var max_y: float = 512
-
-# Time between spawns
-@export var spawn_interval: float = 1.0
-
-# Apple scene to instantiate
 @export var apple_scene: PackedScene
+@export var spawn_x: float = 1138.0
+@export var min_y: float = 138.0
+@export var max_y: float = 512.0
+@export var spawn_interval: float = 2.5 # <-- increased delay
 
-# Timer reference
-@onready var timer := $Timer
+var spawn_timer: Timer
 
-# ---------------------------------------------------------
-# Start the spawning process
-# ---------------------------------------------------------
-func start_spawning() -> void:
-	timer.wait_time = spawn_interval
-	timer.start()
-
-# ---------------------------------------------------------
-# Timer timeout → spawn an apple
-# ---------------------------------------------------------
-func _on_Timer_timeout() -> void:
-	spawn_apple()
-
-# ---------------------------------------------------------
-# Spawn a single apple at the defined X and random Y
-# ---------------------------------------------------------
-func spawn_apple() -> void:
+func _ready() -> void:
 	if apple_scene == null:
-		push_error("AppleSpawner: apple_scene is not assigned!")
+		push_error("Spawner: apple_scene not assigned in Inspector")
+
+	spawn_timer = get_node_or_null("SpawnTimer") as Timer
+	if spawn_timer == null:
+		spawn_timer = Timer.new()
+		spawn_timer.name = "SpawnTimer"
+		spawn_timer.wait_time = spawn_interval
+		spawn_timer.one_shot = false
+		add_child(spawn_timer)
+
+	if not spawn_timer.timeout.is_connected(_on_spawn_timer_timeout):
+		spawn_timer.timeout.connect(_on_spawn_timer_timeout)
+
+	print("SPAWNER ready; spawn interval=", spawn_interval)
+
+	start_spawning()
+
+func start_spawning() -> void:
+	if spawn_timer == null:
+		push_error("Spawner: spawn_timer missing")
+		return
+	spawn_timer.wait_time = spawn_interval
+	spawn_timer.start()
+	print("SPAWNER start_spawning called")
+
+func stop_spawning() -> void:
+	if spawn_timer:
+		spawn_timer.stop()
+		print("SPAWNER stop_spawning called")
+
+func _on_spawn_timer_timeout() -> void:
+	if apple_scene == null:
 		return
 
 	var apple = apple_scene.instantiate()
+	var container: Node = get_node_or_null("Pickups")
+	if container == null:
+		container = self
+	container.add_child(apple)
 
-	# Add apple to the current scene
-	get_tree().current_scene.add_child(apple)
+	apple.global_position = Vector2(spawn_x, randf_range(min_y, max_y))
+	if "speed" in apple:
+		apple.speed = -abs(apple.speed)
+	apple.scale.x = abs(apple.scale.x)
+	apple.scale.y = abs(apple.scale.y)
 
-	# Set spawn position
-	var spawn_position := Vector2(
-		spawn_x,
-		randf_range(min_y, max_y)
-	)
-
-	apple.global_position = spawn_position
-
-	# Debug print (optional)
-	print("Spawned apple at:", spawn_position)
-
-# ---------------------------------------------------------
-# Optional: stop spawning if needed
-# ---------------------------------------------------------
-func stop_spawning() -> void:
-	if timer:
-		timer.stop()
-
-# ---------------------------------------------------------
-# Optional: reset spawner state
-# ---------------------------------------------------------
-func reset_spawner() -> void:
-	if timer:
-		timer.stop()
-		timer.wait_time = spawn_interval
+	print("SPAWNER instantiated apple at", apple.global_position, " parent=", container.name, " parent_scale=", container.scale)
