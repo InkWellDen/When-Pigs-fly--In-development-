@@ -6,7 +6,6 @@
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_lyte0"]
 
 [node name="Apple" type="Node2D" unique_id=997479949]
-position = Vector2(5, 2.9999998)
 scale = Vector2(2.6124823, 2.7507772)
 script = ExtResource("1_ir1en")
 
@@ -16,9 +15,10 @@ texture = ExtResource("2_8gwai")
 [node name="Area2D" type="Area2D" parent="." unique_id=562996476]
 position = Vector2(0, 4.8471155)
 scale = Vector2(-1.0218879, -0.7903981)
+collision_layer = 2
+collision_mask = 0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D" unique_id=1873792662]
-position = Vector2(0, 3)
 shape = SubResource("RectangleShape2D_lyte0")
 
 [connection signal="body_entered" from="Area2D" to="." method="_on_area_2d_body_entered"]

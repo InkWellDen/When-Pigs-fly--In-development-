@@ -1,5 +1,6 @@
 [gd_scene format=3 uid="uid://crwfugngw3lir"]
 
+[ext_resource type="Script" uid="uid://cjg2kqtguae55" path="res://Scripts/maingame.gd" id="1_1l0tm"]
 [ext_resource type="PackedScene" uid="uid://c3umj6rmwfdlr" path="res://Scenes/player.tscn" id="1_qxrlw"]
 [ext_resource type="PackedScene" uid="uid://ux8cyhtcn00r" path="res://Scenes/ground.tscn" id="2_wrm1d"]
 [ext_resource type="Texture2D" uid="uid://cdjjerwv7a6it" path="res://Assets/Sky.png" id="3_wrm1d"]
@@ -13,6 +14,7 @@ size = Vector2(148, 967)
 [sub_resource type="Theme" id="Theme_wrm1d"]
 
 [node name="Game" type="Node2D" unique_id=531414083]
+script = ExtResource("1_1l0tm")
 
 [node name="Ground2" parent="." unique_id=586463681 instance=ExtResource("2_wrm1d")]
 top_level = true
@@ -26,18 +28,18 @@ visibility_layer = 2
 position = Vector2(-33, -171)
 scale = Vector2(1.6669215, 1.8135186)
 
-[node name="StaticBody2D" type="StaticBody2D" parent="." unique_id=1579306229]
+[node name="Collisons for Player" type="StaticBody2D" parent="." unique_id=1579306229]
 position = Vector2(252, 202)
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D" unique_id=533567369]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Collisons for Player" unique_id=533567369]
 position = Vector2(-357, 133)
 shape = SubResource("RectangleShape2D_qxrlw")
 
-[node name="CollisionShape2D2" type="CollisionShape2D" parent="StaticBody2D" unique_id=2040058228]
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="Collisons for Player" unique_id=2040058228]
 position = Vector2(993, 124.5)
 shape = SubResource("RectangleShape2D_qxrlw")
 
-[node name="Sprite2D" type="Sprite2D" parent="." unique_id=110510226]
+[node name="Background" type="Sprite2D" parent="." unique_id=110510226]
 light_mask = 0
 visibility_layer = 4
 position = Vector2(552, 369)
@@ -60,13 +62,12 @@ theme_override_fonts/font = ExtResource("4_3dryh")
 theme_override_font_sizes/font_size = 25
 text = "Press any key to start"
 
-[node name="Apple" parent="." unique_id=997479949 instance=ExtResource("5_wowpa")]
-position = Vector2(900, 341)
-
 [node name="AppleSpawner" type="Node2D" parent="." unique_id=1908028824]
 script = ExtResource("6_i6g32")
+apple_scene = ExtResource("5_wowpa")
 
 [node name="Timer" type="Timer" parent="AppleSpawner" unique_id=726321382]
-wait_time = 1.493
+wait_time = 6.488
+autostart = true
 
 [connection signal="timeout" from="AppleSpawner/Timer" to="AppleSpawner" method="_on_timer_timeout"]
