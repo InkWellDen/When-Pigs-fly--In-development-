@@ -9,6 +9,8 @@
 [ext_resource type="Script" uid="uid://c7luce8dgbc2p" path="res://Scripts/apple_spawner.gd" id="6_i6g32"]
 [ext_resource type="Script" uid="uid://dsok32wg2gsx4" path="res://Scripts/apple.tscn.gd" id="8_h4fw4"]
 [ext_resource type="Texture2D" uid="uid://cp1tpdod616a" path="res://Assets/Appl.png" id="9_ldgsr"]
+[ext_resource type="Script" uid="uid://ci5h4qpj3qvet" path="res://Scripts/enemy_spawner.gd" id="10_ldgsr"]
+[ext_resource type="PackedScene" uid="uid://b2seyuo6etvu8" path="res://Scenes/enemy.tscn" id="11_o5yvi"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_qxrlw"]
 size = Vector2(148, 967)
@@ -57,8 +59,6 @@ texture = ExtResource("3_wrm1d")
 [node name="Player" parent="." unique_id=1762629173 instance=ExtResource("1_qxrlw")]
 top_level = true
 position = Vector2(524, 324)
-collision_layer = 1
-collision_mask = 2
 
 [node name="StartLabel" type="Label" parent="." unique_id=1891919410]
 top_level = true
@@ -95,5 +95,9 @@ script = ExtResource("8_h4fw4")
 position = Vector2(76, 120)
 scale = Vector2(1.7206498, 1.6800005)
 texture = ExtResource("9_ldgsr")
+
+[node name="EnemySpawner" type="Node2D" parent="." unique_id=180404875]
+script = ExtResource("10_ldgsr")
+enemy_scene = ExtResource("11_o5yvi")
 
 [connection signal="timeout" from="AppleSpawner/Timer" to="AppleSpawner" method="_on_timer_timeout"]

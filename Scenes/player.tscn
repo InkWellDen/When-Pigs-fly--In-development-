@@ -3,17 +3,15 @@
 [ext_resource type="Script" uid="uid://b0oqb0o8godt1" path="res://Scripts/player.gd" id="1_cvnsp"]
 [ext_resource type="Texture2D" uid="uid://c8k462wumq41" path="res://Assets/Oinky.png" id="2_cvnsp"]
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_6t5aa"]
+size = Vector2(110, 61)
+
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_cvnsp"]
 size = Vector2(113, 68)
 
 [node name="Player" type="CharacterBody2D" unique_id=1762629173]
-collision_layer = 2
+collision_mask = 6
 script = ExtResource("1_cvnsp")
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=2029171761]
-position = Vector2(-10.5, 5)
-shape = SubResource("RectangleShape2D_cvnsp")
-one_way_collision = true
 
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=2114088257]
 position = Vector2(-10.000004, -4.999996)
@@ -32,3 +30,15 @@ initial_velocity_min = 78.93
 initial_velocity_max = 108.34
 scale_amount_min = 0.4
 scale_amount_max = 10.6
+
+[node name="Area2D" type="Area2D" parent="." unique_id=22889085]
+collision_mask = 4
+
+[node name="Ar" type="CollisionShape2D" parent="Area2D" unique_id=1817477349]
+position = Vector2(-10, 4)
+shape = SubResource("RectangleShape2D_6t5aa")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=2029171761]
+position = Vector2(-10.5, 5)
+shape = SubResource("RectangleShape2D_cvnsp")
+one_way_collision = true

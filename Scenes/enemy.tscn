@@ -1,0 +1,32 @@
+[gd_scene format=3 uid="uid://b2seyuo6etvu8"]
+
+[ext_resource type="Script" uid="uid://bmaklovo8hmuc" path="res://Scripts/enemy.gd" id="1_4gyqm"]
+[ext_resource type="Texture2D" uid="uid://du6hlyw2qm2et" path="res://Assets/wolf.png" id="2_qi2p4"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_epg4t"]
+size = Vector2(74, 38)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_iifgy"]
+size = Vector2(59.442528, 32.73526)
+
+[node name="Enemy" type="CharacterBody2D" unique_id=1709232351]
+scale = Vector2(1.5218018, 2.0112371)
+collision_layer = 2
+script = ExtResource("1_4gyqm")
+
+[node name="Hurtbox" type="Area2D" parent="." unique_id=1722889410]
+position = Vector2(-12.256192, 4.698905)
+scale = Vector2(1.0627934, 1.0573043)
+collision_layer = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Hurtbox" unique_id=2097863964]
+shape = SubResource("RectangleShape2D_epg4t")
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=1785758022]
+texture = ExtResource("2_qi2p4")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=120195624]
+position = Vector2(-3.676858, 5.783267)
+shape = SubResource("RectangleShape2D_iifgy")
+
+[connection signal="body_entered" from="Hurtbox" to="." method="_on_hurtbox_body_entered"]

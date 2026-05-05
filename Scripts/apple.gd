@@ -9,9 +9,9 @@ func _ready() -> void:
 	debug_id = randi() % 10000
 	print("APPLE READY id=", debug_id, " global_pos=", global_position)
 
-	# Make sure the signal is connected
-	if $Area2D.body_entered.is_connected(_on_body_entered) == false:
-		$Area2D.body_entered.connect(_on_body_entered)
+	# Make sure the signal is connected to the correct function
+	if not $Area2D.body_entered.is_connected(_on_Area2D_body_entered):
+		$Area2D.body_entered.connect(_on_Area2D_body_entered)
 
 func _process(delta: float) -> void:
 	position.x += speed * delta
@@ -25,19 +25,12 @@ func _process(delta: float) -> void:
 		print("APPLE id=", debug_id, " despawned right")
 		queue_free()
 
-func _on_body_entered(body: Node) -> void:
-	print("APPLE id=", debug_id, " collided with ", body.name)
+func _on_Area2D_body_entered(body):
+	print("APPLE COLLISION:", body.name)
 
 	if body.name == "Player":
-		# Hide the apple visually
 		$Sprite2D.hide()
-
-		# Disable collision
 		$Area2D/CollisionShape2D.disabled = true
-
-		# Add to apple counter
 		Game.add_apple(1)
-
-		# Remove apple after short delay
 		await get_tree().create_timer(0.1).timeout
 		queue_free()

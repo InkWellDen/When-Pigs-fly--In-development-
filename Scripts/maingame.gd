@@ -8,6 +8,7 @@ var game_started: bool = false
 
 @onready var player := $Player
 @onready var spawner := $AppleSpawner
+@onready var enemy_spawner := $EnemySpawner   # <-- NEW
 @onready var start_label := $StartLabel
 
 func _ready() -> void:
@@ -15,11 +16,17 @@ func _ready() -> void:
 	apples_reserved = 0
 	emit_signal("apples_changed", apples)
 
-	# DO NOT start spawning here
+	# Stop apple spawner until game starts
 	if spawner:
 		spawner.stop_spawning()
 	else:
 		push_error("AppleSpawner node not found at path: $AppleSpawner")
+
+	# Stop enemy spawner until game starts
+	if enemy_spawner:
+		enemy_spawner.stop_spawning()
+	else:
+		push_error("EnemySpawner node not found at path: $EnemySpawner")
 
 func _unhandled_input(event: InputEvent) -> void:
 	if game_started:
@@ -36,6 +43,9 @@ func _unhandled_input(event: InputEvent) -> void:
 
 		if spawner:
 			spawner.start_spawning()
+
+		if enemy_spawner:
+			enemy_spawner.start_spawning()   # <-- ENEMIES BEGIN HERE
 
 func add_apple(count: int = 1) -> void:
 	apples += max(0, count)
